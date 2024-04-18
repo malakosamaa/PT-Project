@@ -160,42 +160,136 @@ int main()
 
 		switch (ActType)
 		{
-		case DRAW_RECT:
-				pOut->PrintMessage("Action: Draw a Rectangle , Click anywhere");
-				break;
+	do
+{
+	ActType = pIn->GetUserAction();
 
-		case STATUS:
-				pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
-				break;
+	switch (ActType)
+	{
+	case STATUS:
+			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
+			break;
  
-		case DRAWING_AREA:
-				pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
-				break;
+	case DRAWING_AREA:
+			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
+			break;
 
-		case EMPTY:
-				pOut->PrintMessage("Action: a click on empty area in the Design Tool Bar, Click anywhere");
-				break;
+	case EMPTY:
+			pOut->PrintMessage("Action: a click on empty area in the Design Tool Bar, Click anywhere");
+			break;
 
-		case TO_DRAW:
-				pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
-				pOut->CreateDrawToolBar();
-				break;
+	case TO_DRAW:
+			pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
+			pOut->CreateDrawToolBar();
+			break;
 
-		case TO_PLAY:
-				pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
-				pOut->CreatePlayToolBar();
-				break;
-
-
-		///TODO: Add more cases for the other action types
-
-
-		case EXIT:				
-				break;
+	case DRAW_RECT:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_RECT;
+			LActType = ActType;
 		}
-	}while(ActType != EXIT);
+		break;
+
+	case DRAW_CIRC:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_CIRC;
+			LActType = ActType;
+		}
+		break;
+
+	case DRAW_LINE:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_LINE;
+
+			LActType = ActType;
+		}
+		break;
+
+	case DRAW_HEXA:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_HEXA;
+			LActType = ActType;
+		}
+		break;
+
+	case DRAW_TRI:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_TRI;
+
+			LActType = ActType;
+		}
+		break;
+
+	case DRAW_SQR:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_SQR;
+			LActType = ActType;
+		}
+		break;
+
+	case CLR:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_CLR; 
+			LActType = ActType;
+		}
+		break;
+
+	case SHAPE:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_SHAPE;
+			LActType = ActType;
+		}
+		break;
+
+	case FILL:
+		pOut->PrintMessage("Action: draw a rectangle, Click anywhere");
+		if (ActType != LActType)
+		{
+			pOut->CreateDrawToolBar();ITM_FILL;
+			LActType = ActType;
+		}
+		break;
+
+	case TO_PLAY:
+			pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+			pOut->CreatePlayToolBar();
+			break;
+
+	case ACTPICFILL:
+		pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+		pOut->CreatePlayToolBar();PICFILL;
+		break;
+
+	case DRAW_COUNT:
+		pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+		pOut->CreatePlayToolBar();DRAW_ITM_COUNT;
+		break;
+
+	
+	///TODO: Add more cases for the other action types
 
 
+	case EXIT:	
+		pOut->CreateDrawToolBar();ITM_EXIT;
+		break;
+	}
+}while(ActType != EXIT);
 	/// Exiting
 	pOut->PrintMessage("Action: EXIT, test is finished, click anywhere to exit");
 	pIn->GetPointClicked(x,y);
