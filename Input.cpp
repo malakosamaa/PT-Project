@@ -52,9 +52,13 @@ ActionType Input::GetUserAction() const
 			switch (ClickedItemOrder)
 			{
 			case ITM_RECT: return DRAW_RECT;
-			case ITM_EXIT: return EXIT;	
-			
-			default: return EMPTY;	//A click on empty place in desgin toolbar
+case ITM_EXIT: return EXIT;
+case ITM_CIRC:return DRAW_CIRC;
+case ITM_SQR:return DRAW_SQR;
+case ITM_HEXA:return DRAW_HEXA;
+case ITM_LINE: return DRAW_LINE;
+case ITM_TRI: return DRAW_TRI;
+default: return EMPTY;		//A click on empty place in desgin toolbar
 			}
 		}
 
@@ -67,14 +71,23 @@ ActionType Input::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
-	else	//GUI is in PLAY mode
+	else
 	{
-		///TODO:
-		//perform checks similar to Draw mode checks above
-		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
-	}	
+		if (y >= 0 && y < UI.ToolBarHeight) {
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		switch (ClickedItemOrder)
+		{
+		case ITM_EXIT:return EXIT;
+		case ITM_SHAPE:return SHAPE;
+		case ITM_CLR:return CLR;
+		case PICFILL:return FILL;
+		default:return EMPTY;
 
+
+			return STATUS;	//just for now. This should be updated
+		}
+
+	}
 }
 /////////////////////////////////
 	
