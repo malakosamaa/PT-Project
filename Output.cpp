@@ -1,4 +1,7 @@
 #include "Output.h"
+#include "input.h"
+#include <cmath>
+
 
 
 Output::Output()
@@ -161,6 +164,117 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 	
 }
+void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const
+{
+	// Determine drawing color
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor;
+	// Figure should be drawn highlighted
+	else
+		DrawingClr = SquareGfxInfo.DrawClr;
+
+	// Set drawing style
+	drawstyle style;
+	if (SquareGfxInfo.isFilled) {
+		style = FILLED;
+		pWind->SetBrush(SquareGfxInfo.FillClr);
+	}
+	else {
+		style = FRAME;
+	}
+
+	// Calculate side length of the square
+	const int s = 200;
+
+	int arrx[4] = { P1.x + s / 2, P1.x + s / 2, P1.x - s / 2, P1.x - s / 2 }; // top right, bottom right, bottom left, top left
+	int arry[4] = { P1.y + s / 2, P1.y - s / 2, P1.y - s / 2, P1.y + s / 2 }; // top right, bottom right, bottom left, top left
+
+	pWind->SetPen(DrawingClr, 1);
+	pWind->DrawPolygon(arrx, arry, 4, style);
+}
+void Output::DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
+{
+	// Determine drawing color
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor;
+	// Figure should be drawn highlighted
+	else
+		DrawingClr = HexagonGfxInfo.DrawClr;
+
+	// Set drawing style
+	drawstyle style;
+	if (HexagonGfxInfo.isFilled)
+		style = FILLED;
+	else
+		style = FRAME;
+
+	// Calculate side length of the hexagon
+	const int s = 100;
+
+	int arrx[6] = { P1.x + s, P1.x - s, P1.x + s / 2, P1.x - s / 2, P1.x + s / 2, P1.x - s / 2 }; // right, left, upright, upleft, downright, downleft
+	int arry[6] = { P1.y, P1.y, P1.y + (sqrt(3) / 2) * s, P1.y + (sqrt(3) / 2) * s, P1.y - (sqrt(3) / 2) * s, P1.y - (sqrt(3) / 2) * s };
+
+	pWind->SetPen(DrawingClr, 1);
+	pWind->SetBrush(HexagonGfxInfo.FillClr); // Set brush regardless of style for consistency
+	pWind->DrawPolygon(arrx, arry, 6, style);
+}
+oid Output::DrawCirc(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const
+{
+	int r = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y))/2;
+	int iX = (P1.x + P2.x) / 2;
+	int iY = (P1.y + P2.y) / 2;
+	color DrawingClr;
+	if (selected) {
+		DrawingClr = UI.HighlightColor;
+	}//Figure should be drawn highlighted
+	else {
+		DrawingClr = CircleGfxInfo.DrawClr;  //when not clicked it is not highlighted
+	}
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (CircleGfxInfo.isFilled)
+	
+		style = FILLED;
+
+	
+	else 
+		style = FRAME;
+	
+	pWind->DrawCircle(iX,iY,r,style);
+}
+
+
+void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected) {
+		DrawingClr = UI.HighlightColor;
+	}//Figure should be drawn highlighted
+	else {
+		DrawingClr = TriangleGfxInfo.DrawClr;  //when not clicked it is not highlighted
+	}
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (TriangleGfxInfo.isFilled) {
+
+		style = FILLED;
+
+	}
+	else {
+		style = FRAME;
+	}
+	const int iX1 = P1.x;
+	const int iX2 = P2.x;
+	const int iX3 = P3.x;
+	const int iY1 = P1.y;
+	const int iY2 = P2.y;
+	const int iY3 = P2.y;
+	pWind->DrawTriangle(iX1, iY1, iX2, iY2, iX3, iY3, style);
+}
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
