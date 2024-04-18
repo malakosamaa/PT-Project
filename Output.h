@@ -20,7 +20,10 @@ public:
 	
 	// -- Figures Drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;  //Draw a rectangle
-	
+        void DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const;
+        void DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const;
+	void DrawCirc(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const;
+        void DrawTri(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const;
 	///Make similar functions for drawing all other figure types.
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
