@@ -6,13 +6,24 @@
 //This file contains some global constants and definitions to be used in the project.
 enum ActionType //The actions supported (you can add more if needed)
 {
-	DRAW_RECT,		//Draw Rectangle
-	EXIT,			//Exit
-	TO_DRAW,		//Switch interface to Draw mode
-	TO_PLAY,		//Switch interface to Play mode
-	EMPTY,			//A click on empty place in the toolbar
-	DRAWING_AREA,	//A click on the drawing area
-	STATUS			//A click on the status bar
+	
+DRAW_RECT,
+DRAW_CIRC,
+DRAW_LINE, 
+DRAW_HEXA,
+DRAW_TRI,
+DRAW_SQR,
+EXIT,   
+EMPTY,
+STATUS,
+SHAPE,
+DRAWING_AREA,
+TO_DRAW,
+TO_PLAY,
+ACTPICFILL,
+DRAW_COUNT,
+CLR,
+FILL,		//A click on the status bar
 
 	///TODO: Add the other action types of the two modes
 };
